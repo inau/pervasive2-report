@@ -1,22 +1,19 @@
 \section{System Architecture}
-The system we have designed consists of two parts,
-one being a input device
-and the other being an application able to recognize the patterns from the device and forward predefined commands.
+The system we have designed consists of multiple parts,
+one being a input device, another being a data processer, 
+a third one being a communications service and the last one being a presenter.
 
 \subsection{The Input Device}
-Our motion tracking device has been built in such a fashion that it resembles a wrist watch.
+Our motion tracking device(MTD) has been built in such a fashion that it resembles a wrist watch.
 This form factor makes it rather compact.
-Additionally a lot of people wear watches on a daily basis which makes it recognizable and barely noticeable for people.
+Additionally a lot of people wear watches on a daily basis which makes the device of a recognizable morphology and barely noticeable for people accustomed to such devices.
+The MTD contains a list of components, the most important are 6DoF Sensor, Bluetooth and the Arduino microcontroller.
 
-The specific device contains a list of components, the most important are 6DoF Sensor, Bluetooth and Arduino microcontroller.
-
-\textbf{6DoF Sensor:}\\
-This is the heart of the device. It contains an accelerometer and a gyroscope. This means we can measure movement and rotation of the wrist of anyone wearing the device.
-
-\textbf{Arduino Pro Mini:}\\
-This is the brain of the device, it handles all communication between the 6DoF chip and forwards the data over bluetooth to any consumers of the data.
-
-The others are not that important to spend a lot of time on, they provide means of communicating, charging and toggling the device on and off.
+The \textbf{6DoF Sensor} is the heart of the device.
+It is a board which contains an accelerometer and a gyroscope.
+This means that it is possible to measure movement and rotation of the wrist of anyone wearing the device.
+The input received from the 6DoF sensor is the propagated to the \textbf{arduino microcontroller}.
+The arduino prepares the raw  values into JSON data. The JSON is then sent using the bluetooth device.
 
 \begin{figure}[!h]
 \centering
@@ -60,8 +57,22 @@ We use Weka 3.6 to evaluate newly received data using a BayesNet classifier and 
 The evaluation of the gesture is performed every 10 * 6 new values received.
 
 \subsection{Android Application}
+The android system is a quite limited system.
+It is able to display  an image.
+It provides the user with the possibility of panning and zooming a given image.
+When the user zooms all the way out panning provides additional functionality.
+Pannning left and right will then swap images from the set of loaded images.
 
 \subsection{Webservice}
+The communication between the Weka Gesture Recognition System and the Android Application is done by a simple webservice.
+It provides GET, POST and DELETE requests which manipulate a queue.
 
+GET pops all the queued gesture recognitions, 
+POST pushes a new one to the service and DELETE clears the queue.
 
-\subsubsection{Pattern Recognition}
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.9\columnwidth]{img/system_diagram}
+\caption{This schematic shows the system interactions.}
+\label{fig:figure2}
+\end{figure}
