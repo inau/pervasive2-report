@@ -12,7 +12,8 @@ The MTD contains a list of components, the most important are 6DoF Sensor, Bluet
 The \textbf{6DoF Sensor} is the heart of the device.
 It is a board which contains an accelerometer and a gyroscope.
 This means that it is possible to measure movement and rotation of the wrist of anyone wearing the device.
-The input received from the 6DoF sensor is the propagated to the \textbf{arduino microcontroller}.
+The sensor produces a set of 6 values: 3 for acceleration and 3 for rotation, each representing information on the axes of the coordinate system.
+The input received from the 6DoF sensor is then propagated to the \textbf{arduino microcontroller}.
 The arduino prepares the raw  values into JSON data. The JSON is then sent using the bluetooth device.
 
 \begin{figure}[!h]
@@ -34,7 +35,7 @@ For further technical details about the challenges encountered please refer to t
 Once the acceleration and rotation data is sent from the device to the computer,
  the values are smoothed with an average of the 20 previous values in order to avoid and reduce the effect of noise on the sensors.
  This phase is called preprocessing of the data. 
- This allowed us to have more precise information, and switch from this:
+ This allowed us to have more precise information, as can be deducted from \textbf{Figure 2} and \textbf{Figure 3}
 
 \begin{figure}[!h]
 \centering
@@ -42,8 +43,6 @@ Once the acceleration and rotation data is sent from the device to the computer,
 \caption{Data from the device before preprocessing.}
 \label{fig:figure2}
 \end{figure}
-
-To this:
 
 \begin{figure}[!h]
 \centering
@@ -74,5 +73,5 @@ POST pushes a new one to the service and DELETE clears the queue.
 \centering
 \includegraphics[width=0.9\columnwidth]{img/system_diagram}
 \caption{This schematic shows the system interactions.}
-\label{fig:figure2}
+\label{fig:figure4}
 \end{figure}
