@@ -9,6 +9,13 @@ This form factor makes it rather compact.
 Additionally a lot of people wear watches on a daily basis which makes the device of a recognizable morphology and barely noticeable for people accustomed to such devices.
 The MTD contains a list of components, the most important are 6DoF Sensor, Bluetooth and the Arduino microcontroller.
 
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.9\columnwidth]{img/watch}
+\caption{The input device.}
+\label{fig:figure5}
+\end{figure}
+
 The \textbf{6DoF Sensor} is the heart of the device.
 It is a board which contains an accelerometer and a gyroscope.
 This means that it is possible to measure movement and rotation of the wrist of anyone wearing the device.
@@ -30,30 +37,10 @@ All the processing and preprocessing of the device's data is performed on a desk
 computer connected to the device.
 Especially challenging was to find and use Java libraries that would allow to establish a Bluetooth 
 connection with the device and to exchange data with the desktop application that would process it. 
-For further technical details about the challenges encountered please refer to the Discussion section. 
-\todo{add technical details about the rxtx fucking everything up}
-Once the acceleration and rotation data is sent from the device to the computer,
- the values are smoothed with an average of the 20 previous values in order to avoid and reduce the effect of noise on the sensors.
- This phase is called preprocessing of the data. 
- This allowed us to have more precise information, as can be deducted from \textbf{Figure 2} and \textbf{Figure 3}
-
-\begin{figure}[!h]
-\centering
-\includegraphics[width=0.9\columnwidth]{img/raw}
-\caption{Data from the device before preprocessing.}
-\label{fig:figure2}
-\end{figure}
-
-\begin{figure}[!h]
-\centering
-\includegraphics[width=0.9\columnwidth]{img/20}
-\caption{Data from the device after preprocessing.}
-\label{fig:figure3}
-\end{figure}
-
-For the actual processing and gesture recognition, we organized known gestures in a large training set, each individual gesture stored as a list of 50 * 6 values plus an identifier. 
-We use Weka 3.6 to evaluate newly received data using a BayesNet classifier and comparing it to the training set.
-The evaluation of the gesture is performed every 10 * 6 new values received.
+For further technical details about the challenges encountered please refer to the System implementation section. 
+This component of the system is responsible for the preprocessing of the data and the gesture recognition. 
+Every time a gesture is captured by the system, an identifier of the gesture is sent from the desktop application to the webservice, 
+where it will be available for its final consumer: the android application.
 
 \subsection{Android Application}
 The android system is a quite limited system.
