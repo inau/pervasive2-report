@@ -6,12 +6,14 @@
 
 
 % Load basic packages
+%\usepackage{biblatex}
 \usepackage{balance}  % to better equalize the last page
 \usepackage{graphics} % for EPS, load graphicx instead
 \usepackage{times}    % comment if you want LaTeX's default font
 \usepackage{url}      % llt: nicely formatted URLs
 \usepackage{xcolor}
 \newcommand\todo[1]{\textcolor{red}{#1}}
+
 
 % llt: Define a global style for URLs, rather that the default one
 \makeatletter
@@ -113,8 +115,8 @@ are included for illustrative purposes only.  \textbf{Don't forget
 to acknowledge funding sources as well}, so you don't wind up
 having to correct it later.
 
-\section{References}
-1. Jalaliniya, S., and Pederson, T.\textit{Designing Wearable Personal Assistants for Surgeons: An Egocentric Approach}. IEEE Pervasive Computing Magazine 2015.
+%\section{References}
+%1. Jalaliniya, S., and Pederson, T.\textit{Designing Wearable Personal Assistants for Surgeons: An Egocentric Approach}. IEEE Pervasive Computing Magazine 2015.
 
 
 % Balancing columns in a ref list is a bit of a pain because you
@@ -136,11 +138,14 @@ having to correct it later.
 %
 % Or, just remove \balance and give up on balancing the last page.
 %
-\balance
+%\balance
 
 % If you want to use smaller typesetting for the reference list,
 % uncomment the following line:
-% \small
-\bibliographystyle{acm-sigchi}
+ \small
+%\bibliographystyle{acm-sigchi}
+\bibliographystyle{plain}
+
 \bibliography{ubicomp}
+%\printbibliography
 \end{document}
