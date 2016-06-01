@@ -1,5 +1,27 @@
 \section{System Implementation} 
-hue hue hue
+As can be deduced from the above overview, the system is quite complex,
+this means that there has been some challenges when building the system.
+
+Initially the concept was to have pure bluetooth communication between the 3 main components,
+but due to unexpected challenges a fourth element was introduced to handle communication between android and the weka system. 
+However this also means that the system is not limited by the short range of the bluetooth receiver.
+
+\subsection{Android Image Presenter}
+The android application has been designed to handle communication over a webservice in the background, 
+while the presentation layer is easily exchangeable due to an interface as seen on figure \ref{fig:and_class}.
+
+The flow of information is quite simple, when the GestureService has a non-empty result from the webservice,
+it propagates this information to the GestureHandler, which has knowledge about any GestureListener instance.
+The Mainactivity.class implements the GestureListener in this specific case.
+A custom ImageView has also been designed to expose functions needed such as zoom and pan.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.9\columnwidth]{img/android_class_diagram}
+\caption{Android Application Class diagram.}
+\label{fig:and_class}
+\end{figure}
+
 
 \subsection{Gesture Recognition}
 \subsubsection{Preprocessing}

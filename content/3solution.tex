@@ -7,7 +7,7 @@ a third one being a communications service and the last one being a presenter.
 Our motion tracking device(MTD) has been built in such a fashion that it resembles a wrist watch.
 This form factor makes it rather compact.
 Additionally a lot of people wear watches on a daily basis which makes the device of a recognizable morphology and barely noticeable for people accustomed to such devices.
-The MTD contains a list of components, the most important are 6DoF Sensor, Bluetooth and the Arduino microcontroller.
+The MTD contains a list of components, the most important are 6 Degrees of Freedom(6DoF) Sensor, Bluetooth and the Arduino microcontroller.
 
 \begin{figure}[!h]
 \centering
@@ -46,10 +46,21 @@ where it will be available for its final consumer: the android application.
 The android system is a quite limited system.
 It is able to display  an image.
 It provides the user with the possibility of panning and zooming a given image.
-When the user zooms all the way out panning provides additional functionality.
-Pannning left and right will then swap images from the set of loaded images.
-\todo{add some user scenarios - images etc.}
+When the user zooms all the way out, panning provides additional functionality such as
+being able to swap images from a set of loaded images.
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.4\columnwidth]{img/android_main}
+\caption{Interface of the android image presenter}
+\label{fig:android1}
+\end{figure}
 
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.4\columnwidth]{img/android_zoom_pan}
+\caption{ Image of pan to swap image functionality.}
+\label{fig:android2}
+\end{figure}
 
 \subsection{Webservice}
 The communication between the Weka Gesture Recognition System and the Android Application is done by a simple webservice.
