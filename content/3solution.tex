@@ -1,4 +1,4 @@
-\section{System}
+\section{System Overview}
 The system we have designed consists of multiple parts,
 one being a input device, another being a data processer, 
 a third one being a communications service and the last one being a presenter.
@@ -6,7 +6,9 @@ a third one being a communications service and the last one being a presenter.
 \subsection{The Input Device}
 Our motion tracking device(MTD) has been built in such a fashion that it resembles a wrist watch.
 This form factor makes it rather compact.
+
 Additionally a lot of people wear watches on a daily basis which makes the device of a recognizable morphology and barely noticeable for people accustomed to such devices.
+
 The MTD contains a list of components, the most important are 6 Degrees of Freedom(6DoF) Sensor, Bluetooth and the Arduino microcontroller.
 
 \begin{figure}[!h]
@@ -20,6 +22,7 @@ The \textbf{6DoF Sensor} is the heart of the device.
 It is a board which contains an accelerometer and a gyroscope.
 This means that it is possible to measure movement and rotation of the wrist of anyone wearing the device.
 The sensor produces a set of 6 values: 3 for acceleration and 3 for rotation, each representing information on the axes of the coordinate system.
+
 The input received from the 6DoF sensor is then propagated to the \textbf{arduino microcontroller}.
 The arduino prepares the raw  values into JSON data. The JSON is then sent using the bluetooth device.
 
@@ -50,6 +53,13 @@ Every time a gesture is recognized by the system, an identifier of the gesture i
 
 For further technical details about the challenges encountered please refer to the System implementation section and the Technical challenges section.
 
+\subsection{Webservice}
+The communication between the Weka Gesture Recognition System and the Android Application is done by a simple webservice.
+It provides GET, POST and DELETE requests which manipulate a queue.
+
+GET pops all the queued gesture recognitions, 
+POST pushes a new gesture recognition to the service and DELETE clears the queue.
+
 \subsection{Android Application}
 The android system is a quite limited system.
 It is able to display an image as seen on figure \ref{fig:android1}.
@@ -71,13 +81,6 @@ being able to swap images from a set of loaded images as seen on figure \ref{fig
 \caption{ Image of pan to swap image functionality.}
 \label{fig:android2}
 \end{figure}
-
-\subsection{Webservice}
-The communication between the Weka Gesture Recognition System and the Android Application is done by a simple webservice.
-It provides GET, POST and DELETE requests which manipulate a queue.
-
-GET pops all the queued gesture recognitions, 
-POST pushes a new one to the service and DELETE clears the queue.
 
 \begin{figure}[!h]
 \centering

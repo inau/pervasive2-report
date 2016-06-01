@@ -5,35 +5,7 @@ this means that there has been some challenges when building the system.
 Initially the concept was to have pure bluetooth communication between the 3 main components,
 but due to unexpected challenges a fourth element was introduced to handle communication between android and the weka system. 
 However this also means that the system is not limited by the short range of the bluetooth receiver.
-The flow we ended up with is shown in figure \ref{fig:sys}.
-
-\subsection{Android Image Presenter}
-The android application has been designed to handle communication over a webservice in the background, 
-while the presentation layer is easily exchangeable due to an interface as seen on figure \ref{fig:and_class}.
-
-
-The flow of information is quite simple, when the GestureService has a non-empty result from the webservice,
-it propagates this information to the GestureHandler, which has knowledge about any GestureListener instance.
-
-
-The Mainactivity.class implements the GestureListener.
-A custom ImageView has been designed to expose functions needed such as zoom and pan, which are manipulated via the aforementioned listener.
-
-\begin{figure}[!h]
-\centering
-\includegraphics[width=1\columnwidth]{img/android_class_diagram}
-\caption{Android Application Class diagram.}
-\label{fig:and_class}
-\end{figure}
-
-\subsection{Webservice}
-The communication between the android presenter app and the gesture recognition system is done using a simple webservice.
-The webservice uses a queue and is therefore prone to both starvation and overflow
-(in the sense that commands queue up to such a level that there will be a significant delay when handling them).
-
-The way we handle these potential issues is quite different.
-The starvation issues are handled on the android device with a simple null or 0 elements check on the web service results.
-The overflow is handled by being able to discard all the queued elements using a DELETE request sent to the service.
+The communication flow we ended up with is shown in figure \ref{fig:sys}.
 
 \subsection{Gesture Recognition}
 The gesture recognition is done in multiple steps, since the system has been designed not to preprocess the data on the MTD.
@@ -70,6 +42,7 @@ We organized known gestures in a very large training set, each individual gestur
 
 The training data set in the final version of the project reached more than 500 entries in total.
 This was achieved by automatically storing multiple entries for each single gesture.
+
 Every gesture was intentionally registered on a larger interval than the one used for the sliding evaluation window.
 In this way, being every entry of the training set of size 50,  each gesture was entered multiple times, one for each of its subsets of 50 subsequent instances.
 The number of entries for the same gesture is usually not fixed and in general it depends on the gesture itself, however it usually varies between 1 and 30.
@@ -96,5 +69,28 @@ REPTree & 95.5\%  & 0.03 \\ [1ex]
 \label{fig:wekaclass}
 \end{figure}
 
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1\columnwidth]{img/android_class_diagram}
+\caption{Android Application Class diagram.}
+\label{fig:and_class}
+\end{figure}
 
+\subsection{Webservice}
+The communication between the android presenter app and the gesture recognition system is done using a simple webservice.
+The webservice uses a queue and is therefore prone to both starvation and overflow
+(in the sense that commands queue up to such a level that there will be a significant delay when handling them).
 
+The way we handle these potential issues is quite different.
+The starvation issues are handled on the android device with a simple null or 0 elements check on the web service results.
+The overflow is handled by being able to discard all the queued elements using a DELETE request sent to the service.
+
+\subsection{Android Image Presenter}
+The android application has been designed to handle communication over a webservice in the background, 
+while the presentation layer is done such that it is easily exchangeable due to an interface as seen on figure \ref{fig:and_class}.
+
+The flow of information is quite simple, when the GestureService has a non-empty result from the webservice,
+it propagates this information to the GestureHandler, which has knowledge about any GestureListener instance.
+
+The Mainactivity.class implements the GestureListener.
+A custom ImageView has been designed to expose functions needed such as zoom and pan, which are manipulated via the aforementioned listener.

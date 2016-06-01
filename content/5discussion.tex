@@ -3,20 +3,25 @@
 \subsection{Technical challenges}
 One of the hardest challenges encountered during the implementation of the system was the interaction between bluetooth and the desktop application for gesture recognition.
 The desktop application was programmed in Java, hence it was possible to use the Weka libraries for the gesture evaluation.
-We used the BlueCove Java library to build a bluetooth interface \cite{bluecove}. \todo{cite bluecove http://bluecove.org/ }.
+
+We used the BlueCove Java library to build a bluetooth interface \cite{bluecove}.
 This library has not been updated since 2008, and has some compatibility issues with modern operating systems and java versions.
 In particular, OS X deprecated functions that were required for some of the library functionalities after the release of OS X 10.8 in 2012.
 Also the library is bound to work in 32 bit mode, which is not supported for java sdk 1.8 nor 1.7.
 The only way to make it work was then to downgrade the application to use Java 6.
 
 \subsection{Conclusion}
-
 One of the less performant aspects of the project was the bluetooth connection, which was unstable at times. 
 This led to difficulties in establishing a connection and sometimes drops of connectivity.
 We account interference from other devices in the ITU building mostly responsible for that. 
 In fact, the problem was easily resolved by changing physical location when using the system.
 All in all the final result was a well performing prototype of the system, with just some minor flaws.
+
 Relying on a web service to send and receive the gestures caused a delay of about 0.5 seconds from the performing of the gesture to the display of the result.
-The accuracy of the predictions when performing gestures was mostly accurate on slow movements. When not moving, it is possible to get feedback for gestures that are not being performed, this is usually due to unusual inclinations of the device when standing still.
-To avoid or at least limit false positives, we actually account only for gestures that are detected at least twice in two consecutive predictions. 
+This is close to the expectations, seeing there are multiple factors affecting this delay. First there is the latency to the webservice and secondly there are the computations done by the gesture recognition system.
+
+The accuracy of the predictions when performing gestures was mostly accurate on slow movements.
+When not moving, it is possible to get feedback for gestures that are not being performed, this is usually due to unusual inclinations of the device when standing still.
+To avoid or at least limit false positives, we actually account only for gestures that are detected at least twice in two consecutive predictions.
+Unless it is tilting movements, as these are easier to distinguish compared to panning movements. 
 This approach led to more precise feedback, but it might end up ignoring some movements that are poorly recognized.
