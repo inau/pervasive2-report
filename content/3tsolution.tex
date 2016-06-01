@@ -11,10 +11,13 @@ The flow we ended up with is shown in figure \ref{fig:sys}.
 The android application has been designed to handle communication over a webservice in the background, 
 while the presentation layer is easily exchangeable due to an interface as seen on figure \ref{fig:and_class}.
 
+
 The flow of information is quite simple, when the GestureService has a non-empty result from the webservice,
 it propagates this information to the GestureHandler, which has knowledge about any GestureListener instance.
-The Mainactivity.class implements the GestureListener in this specific case.
-A custom ImageView has also been designed to expose functions needed such as zoom and pan, this is manipulated via the aforementioned listener.
+
+
+The Mainactivity.class implements the GestureListener.
+A custom ImageView has been designed to expose functions needed such as zoom and pan, which are manipulated via the aforementioned listener.
 
 \begin{figure}[!h]
 \centering
