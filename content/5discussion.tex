@@ -1,7 +1,22 @@
-\section{Discussion}
-One of the less performant aspects of the project was the bluetooth connection, which was very unstable. 
-We account interference in the ITU building mostly responsible for that. \todo{other reasons?}
+\section{Discussion and results}
 
-\subsection{Result}
-The system sometimes encounters bluetooth interference from other devices which
-cause the system not to work properly. Moreover, the weak Wi-Fi signals made system delays when simulating the hand gestures. 
+\subsection{Technical challenges}
+One of the hardest challenges encountered during the implementation of the system was the interaction with bluetooth and the desktop application for gesture recognition.
+The application was programmed in Java, so that it was possible to use the Weka libraries or the gesture evaluation.
+We used the BlueCove Java library to build a bluetooth interface \cite{bluecove} \todo{cite bluecove http://bluecove.org/ } in lack of a better alternative.
+This library has no longer been updated after 2008, and has some compatibility issues with modern operating systems and java versions.
+In particular, OS X deprecated functions that were required for some of the library functionalities after the release of OS X 10.8 in 2012.
+Also the library is bound to work in 32 bit mode, which is not supported for java sdk 1.8 nor 1.7.
+The only way to make it work was then to downgrade the application to use Java 6.
+
+\subsection{conclusion}
+
+One of the less performant aspects of the project was the bluetooth connection, which was unstable at times. 
+This led to difficulties in establishing a connection and sometimes drops of connectivity.
+We account interference from other devices in the ITU building mostly responsible for that. 
+In fact, the problem was easily resolved by changing physical location when using the system.
+All in all the final result was a well performing prototype of the system, with just some minor flaws.
+Relying on a web service to send and receive the gestures caused a delay of about 0.5 seconds from the performing of the gesture to the display of the result.
+The accuracy of the predictions when performing gestures was mostly accurate on slow movements. When not moving, it is possible to get feedback for gestures that are not being performed, this is usually due to unusual inclinations of the device when standing still.
+To avoid or at least limit false positives, we actually account only for gestures that are detected at least twice in two consecutive predictions. 
+This approach led to more precise feedback, but it might end up ignoring some movements that are poorly recognized.
