@@ -45,14 +45,22 @@ This was achieved by automatically storing multiple entries for each single gest
 
 Every gesture was intentionally registered on a larger interval than the one used for the sliding evaluation window.
 In this way, being every entry of the training set of size 50,  each gesture was entered multiple times, one for each of its subsets of 50 subsequent instances.
-The number of entries for the same gesture is usually not fixed and in general it depends on the gesture itself, however it usually varies between 1 and 30.
+The number of entries for the same gesture is usually not fixed and in general it depends on the gesture itself, however it usually varies between 1 and 30.\\
+This process is depicted in figure \ref{fig:training}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1\columnwidth]{img/gesture_window_example}
+\caption{Storing a bigger gesture in the training data set.}
+\label{fig:training}
+\end{figure}
 
 The evaluation of the gesture is performed every 10 * 6 new values received,
  and being that every gesture is stored in the different phases of its conduct,
   the likelihood of evaluating gestures that are in unknown phases and therefore not recognized is lower.
 
 We use Weka 3.6 to evaluate newly received data using a BayesNet classifier and comparing it to the training set. 
-This resulted as the most accurate classifier for our model, giving up to 100\% accuracy in the testing phase of the project.
+This resulted as one of the most accurate classifiers for our model, giving up to 100\% accuracy in the testing phase of the project. A comparison with other classifiers is shown in figure \ref{fig:wekaclass}.
 
 \begin{figure}[h]
 \begin{center}
