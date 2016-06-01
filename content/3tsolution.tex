@@ -73,10 +73,13 @@ This resulted as the most accurate classifier for our model, giving up to 100\% 
 
 \begin{figure}[h]
 \begin{center}
-\begin{tabular}{ L{0.3\columnwidth} R{0.3\columnwidth} } %\hline
-Classifier & Precision \\ \hline \hline
-one & 20\% \\ 
-two & 10\%  \\ %\hline
+\begin{tabular}{ l  c r }
+Classifier & Precision & Time(s)\\ [0.5ex]
+\hline \hline
+BayesNet & 100 \%  & 0.06\\ 
+IBk & 100 \% & 0.1 \\
+LWL & 77.3\%  & 1.86\\
+REPTree & 95.5\%  & 0.03 \\ [1ex]
 \end{tabular}
 \end{center}
 \caption{Test table for classifiers}
