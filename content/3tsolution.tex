@@ -36,6 +36,9 @@ The starvation issues are handled on the android device with a simple null or 0 
 The overflow is handled by being able to discard all the queued elements using a DELETE request sent to the service.
 
 \subsection{Gesture Recognition}
+The gesture recognition is done in multiple steps, since the system has been designed not to preprocess the data on the MTD.
+The first step is preprocessing and the second is classifying or evaluating.
+
 \subsubsection{Preprocessing}
 Once the acceleration and rotation data is sent from the device to the computer,
  the values are smoothed with an average of the 20 previous values in order to avoid and reduce the effect of noise on the sensors.
@@ -60,14 +63,21 @@ Once the acceleration and rotation data is sent from the device to the computer,
 For the actual processing and gesture recognition, we use a sliding window approach on the time series data we receive.
 The window is of size 50, hence it will evaluate a sequence of 50 movement instances in a sequence,
 every instance consisting of 6 values.
+
 The window is able to capture a period of time of about 2 seconds, as the sampling rate of the device is about 25 Hz.
+
 We organized known gestures in a very large training set, each individual gesture stored as a list of 50 * 6 values plus an identifier, in a way that every gesture will be compatible with the sliding window. 
+
 The training data set in the final version of the project reached more than 500 entries in total.
 This was achieved by automatically storing multiple entries for each single gesture.
 Every gesture was intentionally registered on a larger interval than the one used for the sliding evaluation window.
 In this way, being every entry of the training set of size 50,  each gesture was entered multiple times, one for each of its subsets of 50 subsequent instances.
 The number of entries for the same gesture is usually not fixed and in general it depends on the gesture itself, however it usually varies between 1 and 30.
-The evaluation of the gesture is performed every 10 * 6 new values received, and being that every gesture is stored in the different phases of its conduct, the likelihood of evaluating gestures that are in unknown phases and therefore not recognized is lower.
+
+The evaluation of the gesture is performed every 10 * 6 new values received,
+ and being that every gesture is stored in the different phases of its conduct,
+  the likelihood of evaluating gestures that are in unknown phases and therefore not recognized is lower.
+
 We use Weka 3.6 to evaluate newly received data using a BayesNet classifier and comparing it to the training set. 
 This resulted as the most accurate classifier for our model, giving up to 100\% accuracy in the testing phase of the project.
 
