@@ -32,15 +32,23 @@ The arduino prepares the raw  values into JSON data. The JSON is then sent using
 
 \subsection{Weka Gesture Recognition System}
 Since the input device we have built is quite lightweight, data processing needs to be done elsewhere.
+
 This provided us with the challenge of transferring data from one bluetooth capable device to another.
 All the processing and preprocessing of the device's data is performed on a desktop application on a 
-computer connected to the device.
-Especially challenging was to find and use Java libraries that would allow to establish a Bluetooth 
-connection with the device and to exchange data with the desktop application that would process it. 
-For further technical details about the challenges encountered please refer to the System implementation section. 
-This component of the system is responsible for the preprocessing of the data and the gesture recognition. 
-Every time a gesture is captured by the system, an identifier of the gesture is sent from the desktop application to the webservice, 
-where it will be available for its final consumer: the android application.
+computer connected to the device vie bluetooth.
+
+One of the biggest challenges was to find and integrate Java libraries which would allow the system to establish such a  
+connection to the MTD.
+
+Data exchange is crucial to be able to process it in the desktop application and recognize patterns.
+Processing covers the steps of preprocessing and classifying; once these steps have been completed a gesture is hopefully recognized.
+
+
+%This component of the system is responsible for the preprocessing of the data and the gesture recognition. 
+Every time a gesture is recognized by the system, an identifier of the gesture is sent from the desktop application to the webservice where it will be available for its final consumer: the android application.
+
+
+For further technical details about the challenges encountered please refer to the System implementation section.
 
 \subsection{Android Application}
 The android system is a quite limited system.
