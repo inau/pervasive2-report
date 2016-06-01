@@ -21,11 +21,19 @@ A custom ImageView has been designed to expose functions needed such as zoom and
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=0.9\columnwidth]{img/android_class_diagram}
+\includegraphics[width=1\columnwidth]{img/android_class_diagram}
 \caption{Android Application Class diagram.}
 \label{fig:and_class}
 \end{figure}
 
+\subsection{Webservice}
+The communication between the android presenter app and the gesture recognition system is done using a simple webservice.
+The webservice uses a queue and is therefore prone to both starvation and overflow
+(in the sense that commands queue up to such a level that there will be a significant delay when handling them).
+
+The way we handle these potential issues is quite different.
+The starvation issues are handled on the android device with a simple null or 0 elements check on the web service results.
+The overflow is handled by being able to discard all the queued elements using a DELETE request sent to the service.
 
 \subsection{Gesture Recognition}
 \subsubsection{Preprocessing}
@@ -34,16 +42,16 @@ Once the acceleration and rotation data is sent from the device to the computer,
  This phase is called preprocessing of the data. 
  This allowed us to have more precise information, as can be deducted from the images  \ref{fig:figure2} and \ref{fig:figure3}
 
-\begin{figure}[!h]
+\begin{figure}[h]
 \centering
-\includegraphics[width=0.9\columnwidth]{img/raw}
+\includegraphics[width=1\columnwidth]{img/raw}
 \caption{Data from the device before preprocessing.}
 \label{fig:figure2}
 \end{figure}
 
-\begin{figure}[!h]
+\begin{figure}[h]
 \centering
-\includegraphics[width=0.9\columnwidth]{img/20}
+\includegraphics[width=1\columnwidth]{img/20}
 \caption{Data from the device after preprocessing.}
 \label{fig:figure3}
 \end{figure}
